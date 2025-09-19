@@ -27,6 +27,7 @@
             line-height: 1.6;
             color: var(--text);
             background-color: #fff;
+            scroll-behavior: smooth;
         }
         
         .container {
@@ -166,7 +167,7 @@
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(78, 137, 232, 0.8), rgba(78, 137, 232, 0.8)), url('https://placehold.co/1200x600/4e89e8/white?text=Pets+Hero+Image') no-repeat center center/cover;
+            background: linear-gradient(rgba(78, 137, 232, 0.8), rgba(78, 137, 232, 0.8)), url('https://images.unsplash.com/photo-1535930891776-0c2dfb7fda1a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
             color: white;
             text-align: center;
             padding: 100px 0;
@@ -230,6 +231,11 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
         }
         
         .service-img {
@@ -313,7 +319,8 @@
         }
         
         .form-group input,
-        .form-group textarea {
+        .form-group textarea,
+        .form-group select {
             width: 100%;
             padding: 12px;
             border: 1px solid #ddd;
@@ -346,6 +353,7 @@
             align-items: center;
             justify-content: center;
             color: #999;
+            overflow: hidden;
         }
         
         /* Blog Section */
@@ -360,6 +368,11 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
         }
         
         .blog-img {
@@ -460,6 +473,56 @@
             color: #ccc;
         }
         
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Appointment Form */
+        .appointment-form {
+            display: none;
+        }
+        
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--accent);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 1000;
+        }
+        
         /* Responsive Styles */
         @media (max-width: 992px) {
             .about-content {
@@ -514,6 +577,11 @@
             .hero {
                 padding: 80px 0;
             }
+            
+            .modal-content {
+                padding: 20px;
+                margin: 0 15px;
+            }
         }
     </style>
 </head>
@@ -533,6 +601,7 @@
                     <li><a href="#about">About Us</a></li>
                     <li><a href="#contact">Contact</a></li>
                     <li><a href="#blog">Blog</a></li>
+                    <li><a href="#" id="appointment-btn">Appointment</a></li>
                 </ul>
                 <div class="mobile-menu-btn">
                     <i class="fas fa-bars"></i>
@@ -546,7 +615,7 @@
         <div class="container hero-content">
             <h1>Compassionate Care for Your Furry Friends</h1>
             <p>At Paws & Claws Veterinary Clinic, we provide top-quality healthcare services for your beloved pets with compassion and expertise.</p>
-            <a href="#contact" class="btn btn-secondary">Book an Appointment</a>
+            <a href="#" class="btn btn-secondary" id="hero-appointment-btn">Book an Appointment</a>
         </div>
     </section>
 
@@ -597,6 +666,7 @@
                     <div class="service-content">
                         <h3>General Consultations</h3>
                         <p>Regular check-ups and health assessments to keep your pet in optimal condition.</p>
+                        <a href="#" class="btn service-book-btn">Book Now</a>
                     </div>
                 </div>
                 
@@ -607,6 +677,7 @@
                     <div class="service-content">
                         <h3>Vaccinations</h3>
                         <p>Complete vaccination programs to protect your pet from common diseases.</p>
+                        <a href="#" class="btn service-book-btn">Book Now</a>
                     </div>
                 </div>
                 
@@ -617,6 +688,7 @@
                     <div class="service-content">
                         <h3>Dental Care</h3>
                         <p>Professional dental cleaning, extractions, and oral health assessments.</p>
+                        <a href="#" class="btn service-book-btn">Book Now</a>
                     </div>
                 </div>
                 
@@ -627,6 +699,7 @@
                     <div class="service-content">
                         <h3>Grooming Services</h3>
                         <p>Keep your pet looking and feeling their best with our grooming services.</p>
+                        <a href="#" class="btn service-book-btn">Book Now</a>
                     </div>
                 </div>
                 
@@ -637,6 +710,7 @@
                     <div class="service-content">
                         <h3>Diagnostic Imaging</h3>
                         <p>State-of-the-art X-ray and ultrasound services for accurate diagnoses.</p>
+                        <a href="#" class="btn service-book-btn">Book Now</a>
                     </div>
                 </div>
                 
@@ -647,6 +721,7 @@
                     <div class="service-content">
                         <h3>Surgical Procedures</h3>
                         <p>From routine spays/neuters to more complex operations in our modern surgical suite.</p>
+                        <a href="#" class="btn service-book-btn">Book Now</a>
                     </div>
                 </div>
             </div>
@@ -686,6 +761,7 @@
                     </div>
                     <h4>Dr. Sarah Johnson</h4>
                     <p>Chief Veterinarian</p>
+                    <button class="btn team-btn" data-name="Dr. Sarah Johnson" data-title="Chief Veterinarian" data-bio="Dr. Johnson has over 15 years of experience in veterinary medicine and specializes in surgery and internal medicine. She graduated from Cornell University College of Veterinary Medicine.">View Profile</button>
                 </div>
                 
                 <div class="team-member">
@@ -694,6 +770,7 @@
                     </div>
                     <h4>Dr. Michael Chen</h4>
                     <p>Senior Veterinarian</p>
+                    <button class="btn team-btn" data-name="Dr. Michael Chen" data-title="Senior Veterinarian" data-bio="Dr. Chen is our resident expert in dermatology and dentistry. He received his DVM from UC Davis and has been with our clinic for 8 years.">View Profile</button>
                 </div>
                 
                 <div class="team-member">
@@ -702,6 +779,7 @@
                     </div>
                     <h4>Emily Rodriguez</h4>
                     <p>Veterinary Technician</p>
+                    <button class="btn team-btn" data-name="Emily Rodriguez" data-title="Veterinary Technician" data-bio="Emily is a certified veterinary technician with a special interest in anesthesia and emergency care. She's been with our clinic for 5 years.">View Profile</button>
                 </div>
                 
                 <div class="team-member">
@@ -710,6 +788,7 @@
                     </div>
                     <h4>Jessica Williams</h4>
                     <p>Veterinary Assistant</p>
+                    <button class="btn team-btn" data-name="Jessica Williams" data-title="Veterinary Assistant" data-bio="Jessica is our veterinary assistant who specializes in animal behavior and client education. She's known for her gentle approach with anxious pets.">View Profile</button>
                 </div>
             </div>
         </div>
@@ -726,7 +805,7 @@
             <div class="contact-container">
                 <div class="contact-form">
                     <h3>Send us a Message</h3>
-                    <form>
+                    <form id="contact-form">
                         <div class="form-group">
                             <label for="name">Your Name</label>
                             <input type="text" id="name" placeholder="John Doe" required>
@@ -797,7 +876,7 @@
                     </div>
                     
                     <div class="map-container">
-                        <i class="fas fa-map-marked-alt"></i> Google Maps Embed
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.9663095343008!2d-74.004258724269!3d40.74076987932881!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259bf5c8eef01%3A0x41c84c6d5df0b2e9!2sVeterinary%20Clinic!5e0!3m2!1sen!2sus!4v1686591300378!5m2!1sen!2sus" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     </div>
                 </div>
             </div>
@@ -824,7 +903,7 @@
                         </div>
                         <h3>Summer Safety Tips for Your Pets</h3>
                         <p>Learn how to keep your pets safe and cool during the hot summer months with these essential tips.</p>
-                        <a href="#" class="btn">Read More</a>
+                        <a href="#" class="btn read-more-btn">Read More</a>
                     </div>
                 </div>
                 
@@ -839,7 +918,7 @@
                         </div>
                         <h3>Understanding Your Cat's Behavior</h3>
                         <p>Decode the mysteries behind your feline friend's behaviors and strengthen your bond.</p>
-                        <a href="#" class="btn">Read More</a>
+                        <a href="#" class="btn read-more-btn">Read More</a>
                     </div>
                 </div>
                 
@@ -854,7 +933,7 @@
                         </div>
                         <h3>The Importance of Dental Care for Pets</h3>
                         <p>Regular dental care is essential for your pet's overall health. Learn how to maintain their oral hygiene.</p>
-                        <a href="#" class="btn">Read More</a>
+                        <a href="#" class="btn read-more-btn">Read More</a>
                     </div>
                 </div>
             </div>
@@ -915,19 +994,264 @@
         </div>
     </footer>
 
+    <!-- Appointment Modal -->
+    <div class="modal" id="appointment-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Book an Appointment</h2>
+            <form id="appointment-form">
+                <div class="form-group">
+                    <label for="appointment-name">Your Name</label>
+                    <input type="text" id="appointment-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="appointment-email">Email Address</label>
+                    <input type="email" id="appointment-email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="appointment-phone">Phone Number</label>
+                    <input type="tel" id="appointment-phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="appointment-pet">Pet Type</label>
+                    <select id="appointment-pet" required>
+                        <option value="">Select Pet Type</option>
+                        <option value="dog">Dog</option>
+                        <option value="cat">Cat</option>
+                        <option value="bird">Bird</option>
+                        <option value="reptile">Reptile</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="appointment-service">Service Needed</label>
+                    <select id="appointment-service" required>
+                        <option value="">Select Service</option>
+                        <option value="consultation">General Consultation</option>
+                        <option value="vaccination">Vaccination</option>
+                        <option value="dental">Dental Care</option>
+                        <option value="grooming">Grooming</option>
+                        <option value="surgery">Surgery</option>
+                        <option value="emergency">Emergency Care</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="appointment-date">Preferred Date</label>
+                    <input type="date" id="appointment-date" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="appointment-time">Preferred Time</label>
+                    <select id="appointment-time" required>
+                        <option value="">Select Time</option>
+                        <option value="morning">Morning (8AM - 11AM)</option>
+                        <option value="afternoon">Afternoon (1PM - 4PM)</option>
+                        <option value="evening">Evening (5PM - 6PM)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="appointment-notes">Additional Notes</label>
+                    <textarea id="appointment-notes" rows="3"></textarea>
+                </div>
+                
+                <button type="submit" class="btn">Book Appointment</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Team Member Modal -->
+    <div class="modal" id="team-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="team-modal-content">
+                <!-- Content will be inserted by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span id="toast-message"></span>
+    </div>
+
     <script>
-        // Mobile menu toggle
+        // DOM Elements
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const navMenu = document.querySelector('.nav-menu');
-        
+        const appointmentBtns = document.querySelectorAll('#appointment-btn, #hero-appointment-btn, .service-book-btn');
+        const appointmentModal = document.getElementById('appointment-modal');
+        const closeModalBtns = document.querySelectorAll('.close-modal');
+        const appointmentForm = document.getElementById('appointment-form');
+        const contactForm = document.getElementById('contact-form');
+        const teamBtns = document.querySelectorAll('.team-btn');
+        const teamModal = document.getElementById('team-modal');
+        const teamModalContent = document.getElementById('team-modal-content');
+        const readMoreBtns = document.querySelectorAll('.read-more-btn');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toast-message');
+
+        // Mobile Menu Toggle
         mobileMenuBtn.addEventListener('click', () => {
             navMenu.classList.toggle('active');
+            mobileMenuBtn.querySelector('i').classList.toggle('fa-bars');
+            mobileMenuBtn.querySelector('i').classList.toggle('fa-times');
         });
-        
+
         // Close mobile menu when clicking on a link
         document.querySelectorAll('.nav-menu a').forEach(link => {
             link.addEventListener('click', () => {
                 navMenu.classList.remove('active');
+                mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+                mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+            });
+        });
+
+        // Appointment Modal
+        appointmentBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                appointmentModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // Team Member Modal
+        teamBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const name = btn.getAttribute('data-name');
+                const title = btn.getAttribute('data-title');
+                const bio = btn.getAttribute('data-bio');
+                
+                teamModalContent.innerHTML = `
+                    <div class="team-member">
+                        <div class="team-img">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <h2>${name}</h2>
+                        <h3>${title}</h3>
+                        <p>${bio}</p>
+                    </div>
+                `;
+                
+                teamModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // Close Modals
+        closeModalBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                appointmentModal.style.display = 'none';
+                teamModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === appointmentModal) {
+                appointmentModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+            if (e.target === teamModal) {
+                teamModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Form Submissions
+        appointmentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('appointment-name').value,
+                email: document.getElementById('appointment-email').value,
+                phone: document.getElementById('appointment-phone').value,
+                pet: document.getElementById('appointment-pet').value,
+                service: document.getElementById('appointment-service').value,
+                date: document.getElementById('appointment-date').value,
+                time: document.getElementById('appointment-time').value,
+                notes: document.getElementById('appointment-notes').value
+            };
+            
+            // In a real application, you would send this data to a server
+            console.log('Appointment Form Data:', formData);
+            
+            // Show success message
+            showToast('Appointment request submitted successfully! We will contact you shortly.');
+            
+            // Close modal and reset form
+            appointmentModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            appointmentForm.reset();
+        });
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                message: document.getElementById('message').value
+            };
+            
+            // In a real application, you would send this data to a server
+            console.log('Contact Form Data:', formData);
+            
+            // Show success message
+            showToast('Message sent successfully! We will get back to you soon.');
+            
+            // Reset form
+            contactForm.reset();
+        });
+
+        // Blog Read More Buttons
+        readMoreBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showToast('Blog feature coming soon!');
+            });
+        });
+
+        // Toast Notification Function
+        function showToast(message) {
+            toastMessage.textContent = message;
+            toast.style.display = 'block';
+            
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+
+        // Set minimum date for appointment to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('appointment-date').setAttribute('min', today);
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if (this.getAttribute('href') === '#') return;
+                
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
     </script>
